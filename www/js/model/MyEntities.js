@@ -27,6 +27,11 @@ define(["mwfUtils", "EntityManager"], function (mwfUtils, EntityManager) {
         this.instantiateManagedAttributes();
 
     }
+
+    // use EntityManager.xtends in order to add entity-specific behaviour
+    EntityManager.xtends(MediaItem, EntityManager.Entity);
+
+    
     Object.defineProperty(MediaItem.prototype, "addedDateString", {
         get: function () {
             alert("Irgendwas");
@@ -50,9 +55,6 @@ define(["mwfUtils", "EntityManager"], function (mwfUtils, EntityManager) {
             }
         }
     });
-
-    // use EntityManager.xtends in order to add entity-specific behaviour
-    EntityManager.xtends(MediaItem, EntityManager.Entity);
 
     // TODO-REPEATED: do not forget to export all type declarations
     return {
