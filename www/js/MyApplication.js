@@ -23,6 +23,12 @@ define(["mwf","mwfUtils","EntityManager","entities","GenericCRUDImplLocal","Gene
                     //this.registerCRUD("MyEntity", this.CRUDOPS.REMOTE, GenericCRUDImplRemote.newInstance("MyEntity"));
 
                     // TODO: do any further application specific initialisations here
+                    this.registerEntity("MediaItem", entities.MediaItem, true);
+                    this.registerCRUD("MediaItem", this.CRUDOPS.LOCAL,GenericCRUDImplLocal.newInstance("MediaItem"));
+                    this.registerCRUD("MediaItem", this.CRUDOPS.REMOTE,GenericCRUDImplRemote.newInstance("MediaItem"));
+
+                    // activate the local crud operations
+                    this.initialiseCRUD(this.CRUDOPS.LOCAL,EntityManager);
 
                     // THIS MUST NOT BE FORGOTTEN: initialise the entity manager!
                     EntityManager.initialise();

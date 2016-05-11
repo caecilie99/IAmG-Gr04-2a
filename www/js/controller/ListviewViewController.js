@@ -1,7 +1,7 @@
 /**
  * @author Jörn Kreutel
  */
-define(["mwf", "entities", "GenericCRUDImplLocal"], function (mwf, entities, GenericCRUDImplLocal) {
+define(["mwf", "entities"], function (mwf, entities) {
 
     function ListviewViewController() {
         console.log("ListviewViewController()");
@@ -15,7 +15,6 @@ define(["mwf", "entities", "GenericCRUDImplLocal"], function (mwf, entities, Gen
         ];
         var addNewMediaItemElement;
         var resetDatabaseElement;
-        var crudops = GenericCRUDImplLocal.newInstance("MediaItem");
 
         /*
          * for any view: initialise the view
@@ -27,9 +26,10 @@ define(["mwf", "entities", "GenericCRUDImplLocal"], function (mwf, entities, Gen
 
             addNewMediaItemElement = this.root.querySelector("#addNewMediaItem");
             addNewMediaItemElement.onclick = function () {
-                crudops.create(new entities.MediaItem("m", "http://lorempixel.com/50/50"), function (created) {
-                    this.addToListview(created);
-                }.bind(this));
+          //      crudops.create(new entities.MediaItem("m", "http://lorempixel.com/50/50"), function (created) {
+          //          this.addToListview(created);
+          //      }.bind(this));
+                this.createNewItem();
             }.bind(this);
 
             resetDatabaseElement = this.root.querySelector("#resetDatabase");
@@ -39,7 +39,7 @@ define(["mwf", "entities", "GenericCRUDImplLocal"], function (mwf, entities, Gen
                 }
             }.bind(this);
 
-            crudops.readAll(function (items) {
+            entities.MediaItem.readAll(function (items) {
                 this.initialiseListview(items);
             }.bind(this));
 
@@ -80,14 +80,20 @@ define(["mwf", "entities", "GenericCRUDImplLocal"], function (mwf, entities, Gen
             // TODO: implement action bindings for dialog, accessing dialog.root
         }
         this.deleteItem = function (item) {
-            crudops.delete(item._id, function () {
-                this.removeFromListview(item.id);
+            item.delete(function () {
+                this.removeFromListview(item._id);
             }.bind(this));
         }
         this.editItem = function (item) {
             item.name = (item.name + item.name);
-            crudops.update(item._id, item, function () {
-                this.updateInListview(item.id, item);
+            item.update(function () {
+                this.updateInListview(item._id, item);
+            }.bind(this));
+        }
+        this.createNewItem = function() {
+            var newItem = new entities.MediaItem("m","http://lorempixel.com/50/50");
+            newItem.create(function(){
+                this.addToListview(newItem);
             }.bind(this));
         }
 
