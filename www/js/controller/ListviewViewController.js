@@ -16,6 +16,21 @@ define(["mwf","entities"], function(mwf, entities) {
          */
         var addNewMediaItemElement;
         this.oncreate = function (callback) {
+            // Listener für create
+            this.addListener(new mwf.EventMatcher("crud", "created", "MediaItem"), function(event){
+                this.addToListview(event.data);
+            }.bind(this));
+
+            // Listener für create
+            this.addListener(new mwf.EventMatcher("crud", "updated", "MediaItem"), function(event){
+                this.updateInListview(event.data._id, event.data);
+            }.bind(this));
+
+            // Listener für Löschen eines Elementes
+            this.addListener(new mwf.EventMatcher("crud", "deleted", "MediaItem"), function(event){
+                this.removeFromListview(event.data);
+            }.bind(this));
+
             entities.MediaItem.readAll(function(items){
                 this.initialiseListview(items);
             }.bind(this));
@@ -37,16 +52,6 @@ define(["mwf","entities"], function(mwf, entities) {
 
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
-        }
-
-
-        /*
-         * for views with listviews: react to the selection of a listitem
-         * TODO: delete if no listview is used or if item selection is specified by targetview/targetaction
-         */
-        this.onListItemSelected = function(listitem,listview) {
-            // TODO: implement how selection of listitem shall be handled
-            alert("Element " + listitem.name + listitem._id +  " wurde ausgewählt!");
         }
 
         /*
@@ -73,18 +78,39 @@ define(["mwf","entities"], function(mwf, entities) {
          * Fuegt ein neues Element hinzu
          */
         this.createNewItem = function(){
-            var newItem = new entities.MediaItem("m", "http://lorempixel.com/50/50");
-            newItem.create(function(){
-                this.addToListview(newItem);
-            }.bind(this));
+            var newItem = new entities.MediaItem("", "http://lorempixel.com/50/50");
+            this.showDialog("mediaItemDialog", {
+                item: newItem,
+                actionBindings: {
+                    submitForm: function(event){
+                        event.original.preventDefault();
+                        newItem.create(function(){
+                            //this.addToListview(newItem);
+                        }.bind(this));
+                        this.hideDialog();
+                    }.bind(this)
+                }
+            });
         }
 
         /*
          * Loescht ein Element
          */
         this.deleteItem = function(item){
+            this.showDialog("mediaItemDialog", {
+                item: item,
+                actionBindings: {
+                    submitForm: function(event){
+
+                    }.bind(this),
+                    deleteItem: function(event){
+                        this.deleteItem(item);
+                        this.hideDialog();
+                    }.bind(this)
+                }
+            })
             item.delete(function(){
-                this.removeFromListview(item._id);
+                //this.removeFromListview(item._id);
             }.bind(this));
         }
 
@@ -92,11 +118,29 @@ define(["mwf","entities"], function(mwf, entities) {
          * Aendert den Namen eines Elementes
          */
         this.editItem = function(item){
-            item.name=item.name+item.name;
-            item.update(function(){
-                this.updateInListview(item._id, item);
-            }.bind(this));
+            this.showDialog("mediaItemDialog", {
+                item: item,
+                actionBindings: {
+                    submitForm: function(event){
+                        event.original.preventDefault();
+                        item.update(function(){
+                            //this.updateInListview(item._id, item);
+                        }.bind(this));
+                        this.hideDialog();
+                    }.bind(this)
+                }
+            });
         }
+
+        /*
+         * Rückkehr von Subview
+         */
+ /*       this.onReturnFromSubview = function(subviewid, returnValue, returnStatus, callback) {
+            if (subviewid=="mediaReadview" && returnValue.deletedItem) {
+                this.removeFromListview(returnValue.deletedItem._id);
+            }
+            callback();
+        }*/
     }
 
     // extend the view controller supertype

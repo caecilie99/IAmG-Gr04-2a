@@ -31,10 +31,9 @@ define(["mwfUtils", "EntityManager"], function (mwfUtils, EntityManager) {
     // use EntityManager.xtends in order to add entity-specific behaviour
     EntityManager.xtends(MediaItem, EntityManager.Entity);
 
-    
+
     Object.defineProperty(MediaItem.prototype, "addedDateString", {
         get: function () {
-            alert("Irgendwas");
             return (new Date(this.added)).toLocaleDateString();
         }
     });
