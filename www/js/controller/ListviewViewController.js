@@ -29,7 +29,7 @@ define(["mwf", "entities"], function (mwf, entities) {
           //      crudops.create(new entities.MediaItem("m", "http://lorempixel.com/50/50"), function (created) {
           //          this.addToListview(created);
           //      }.bind(this));
-                this.createNewItem();
+               this.createNewItem();
             }.bind(this);
 
             resetDatabaseElement = this.root.querySelector("#resetDatabase");
@@ -84,19 +84,54 @@ define(["mwf", "entities"], function (mwf, entities) {
                 this.removeFromListview(item._id);
             }.bind(this));
         }
-        this.editItem = function (item) {
-            item.name = (item.name + item.name);
-            item.update(function () {
-                this.updateInListview(item._id, item);
-            }.bind(this));
-        }
-        this.createNewItem = function() {
-            var newItem = new entities.MediaItem("m","http://lorempixel.com/50/50");
-            newItem.create(function(){
-                this.addToListview(newItem);
-            }.bind(this));
+//        this.editItem = function (item) {
+//            item.name = (item.name + item.name);
+//            item.update(function () {
+//                this.updateInListview(item._id, item);
+//            }.bind(this));
+//        }
+        this.editItem = function(item) {
+            this.showDialog("mediaItemDialog", {
+                item: item, actionBindings: {
+                    submitForm: function(event) {
+                        event.original.preventDefault();
+                        item.update(function(){
+                            this.updateInListview(item._id,item);
+                        }.bind(this));
+                        this.hideDialog();
+                    }.bind(this)
+                    ,/*!!!*/
+                    deleteItem: function(event) {
+                        this.deleteItem(item);
+                        this.hideDialog(); }.bind(this)
+                }
+            });
         }
 
+
+//        this.createNewItem = function() {
+//            var newItem = new entities.MediaItem("m","http://lorempixel.com/50/50");
+//            newItem.create(function(){
+//                this.addToListview(newItem);
+//            }.bind(this));
+//        }
+
+
+        this.createNewItem = function() {
+            var newItem = new entities.MediaItem("", "http://lorempixel.com/50/50");
+            this.showDialog("mediaItemDialog", {
+                item: newItem,
+                actionBindings: {
+                    submitForm: function (event) {
+                        event.original.preventDefault();
+                        newItem.create(function () {
+                            this.addToListview(newItem);
+                        }.bind(this));
+                        this.hideDialog();
+                    }.bind(this)
+                }
+            });
+        }
     }
 
     // extend the view controller supertype
