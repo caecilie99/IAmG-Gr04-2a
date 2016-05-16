@@ -29,14 +29,14 @@
 <!-- TODO-REPEATED: add new views here -->
 <div class="mwf-view mwf-view-initial" id="mediaOverview" data-mwf-viewcontroller="ListviewViewController">
     <header>
-
         <div class="mwf-imgbutton mwf-img-sandwich mwf-left-align" id="resetDatabase"></div>
         <h2 class="mwf-left-align">Medien</h2>
         <div class="mwf-imgbutton mwf-img-plus mwf-right-align" id="addNewMediaItem"></div>
     </header>
     <div class="mwf-body mwf-scrollview">
         <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="mediaItemMenu">
-            <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem">
+            <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind"
+                data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
                 <img class="mwf-left-align" src="{{src}}">
                 <div class="mwf-li-titleblock">
                     <h2>{{name}}{{_id}}</h2>
@@ -60,7 +60,6 @@
         </ul>
     </div>
 </div>
-
 <div class="mwf-dialog mwf-popup mwf-template mwf-databind mwf-view-component"
      data-mwf-viewcontroller="GenericDialogTemplateViewController" data-mwf-templatename="mediaItemDialog">
     <div class="mwf-dialog-body">
@@ -70,7 +69,8 @@
                    type="text" placeholder="Name" required="required" value="{{item.name}}"/>
             <div class="mwf-buttonbar">
                 <button class="mwf-left-align mwf-button" type="button" on-click="deleteItem"
-                        disabled="{{#unless item.created}}disabled{{/unless}}">Löschen</button>
+                        disabled="{{#unless item.created}}disabled{{/unless}}">Löschen
+                </button>
                 <input class="mwf-button-prio mwf-right-align mwf-button" type="submit"
                        value="{{#if item.created}}Ändern{{else}}Hinzufügen{{/if}}"/>
             </div>
@@ -79,5 +79,20 @@
 
 </div>
 
+<div class="mwf-view" id="mediaReadview" data-mwf-viewcontroller="ReadviewViewController">
+    <div class="mwf-template mwf-databind" data-mwf-templatename="mediaReadviewTemplate">
+        <header>
+            <div class="mwf-imgbutton mwf-img-sandwich mwf-left-align"></div>
+            <h2>{{item.name}}</h2>
+            <div class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"></div>
+        </header>
+        <div class="mwf-body mwf-scrollview">
+            <img src="{{item.src}}"/>
+        </div>
+        <footer>
+            <div class="mwf-back mwf-imgbutton mwf-img-backward"></div>
+        </footer>
+    </div>
+</div>
 </body>
 </html>
