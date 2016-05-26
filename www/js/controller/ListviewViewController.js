@@ -15,6 +15,8 @@ define(["mwf","entities"], function(mwf, entities) {
          * for any view: initialise the view
          */
         var addNewMediaItemElement;
+        var resetDatabaseElement;
+        var switchDatabase;
         this.oncreate = function (callback) {
             // Listener für create
             this.addListener(new mwf.EventMatcher("crud", "created", "MediaItem"), function(event){
@@ -31,6 +33,15 @@ define(["mwf","entities"], function(mwf, entities) {
                 this.removeFromListview(event.data);
             }.bind(this));
 
+            switchDatabase = this.root.querySelector("#switchDatabase");
+            switchDatabase.onclick = function() {
+                if (this.application.currentCRUDScope=="local")
+                    this.application.switchCRUD("remote")
+                else
+                    this.application.switchCRUD("local");
+                this.application.readAll();
+            }.bind(this);
+
             entities.MediaItem.readAll(function(items){
                 this.initialiseListview(items);
             }.bind(this));
@@ -41,12 +52,16 @@ define(["mwf","entities"], function(mwf, entities) {
                 this.createNewItem();
             }.bind(this);
 
-            resetDatabaseElement = this.root.querySelector("#resetDatabase");
-            resetDatabaseElement.onclick = function() {
-                if (confirm("Soll die Datenbank wirklich gelöscht werden?")) {
-                    indexedDB.deleteDatabase("mwftutdb");
-                }
-            }.bind(this);
+
+
+            /*
+                        resetDatabaseElement = this.root.querySelector("#resetDatabase");
+                        resetDatabaseElement.onclick = function() {
+                            if (confirm("Soll die Datenbank wirklich gelöscht werden?")) {
+                                indexedDB.deleteDatabase("mwftutdb");
+                            }
+                        }.bind(this);
+            */
 
             this.initialiseListview(items);
 
@@ -84,9 +99,7 @@ define(["mwf","entities"], function(mwf, entities) {
                 actionBindings: {
                     submitForm: function(event){
                         event.original.preventDefault();
-                        newItem.create(function(){
-                            //this.addToListview(newItem);
-                        }.bind(this));
+                        newItem.create();
                         this.hideDialog();
                     }.bind(this)
                 }
@@ -97,18 +110,6 @@ define(["mwf","entities"], function(mwf, entities) {
          * Loescht ein Element
          */
         this.deleteItem = function(item){
-            this.showDialog("mediaItemDialog", {
-                item: item,
-                actionBindings: {
-                    submitForm: function(event){
-
-                    }.bind(this),
-                    deleteItem: function(event){
-                        this.deleteItem(item);
-                        this.hideDialog();
-                    }.bind(this)
-                }
-            })
             item.delete(function(){
                 //this.removeFromListview(item._id);
             }.bind(this));
@@ -123,9 +124,11 @@ define(["mwf","entities"], function(mwf, entities) {
                 actionBindings: {
                     submitForm: function(event){
                         event.original.preventDefault();
-                        item.update(function(){
-                            //this.updateInListview(item._id, item);
-                        }.bind(this));
+                        item.update();
+                        this.hideDialog();
+                    }.bind(this),
+                    deleteItem: function(event){
+                        this.deleteItem(item);
                         this.hideDialog();
                     }.bind(this)
                 }

@@ -24,6 +24,10 @@ define(["mwf","entities"], function(mwf, entities) {
                 }.bind(this))
             }.bind(this));
 
+            viewProxy.bindAction("backToList", function(){
+                this.previousView();
+            }.bind(this));
+
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
         }
@@ -61,8 +65,6 @@ define(["mwf","entities"], function(mwf, entities) {
             proto.bindDialog.call(this,dialogid,dialog,item);
             // TODO: implement action bindings for dialog, accessing dialog.root
         }
-
-
     }
 
     // extend the view controller supertype

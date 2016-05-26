@@ -5,7 +5,7 @@
 * initialise the access to the mdb
 */
 // access the db
-var databaseUrl = "mme2db";
+var databaseUrl = "mmeG04";
 
 // initialise the db using the mdbjs javascript api (here, we do not specify which collection to access as this is up to the user of this api)
 var db = require("mdbjs").connect(databaseUrl);

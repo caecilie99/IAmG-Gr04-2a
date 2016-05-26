@@ -29,7 +29,7 @@
 <!-- TODO-REPEATED: add new views here -->
 <div class="mwf-view mwf-view-initial" id="mediaOverview" data-mwf-viewcontroller="ListviewViewController">
     <header>
-        <div class="mwf-imgbutton mwf-img-sandwich mwf-left-align" id="resetDatabase"></div>
+        <div class="mwf-imgbutton mwf-img-sandwich mwf-left-align" id="switchDatabase"></div>
         <h2 class="mwf-left-align">Medien</h2>
         <div class="mwf-imgbutton mwf-img-plus mwf-right-align" id="addNewMediaItem"></div>
     </header>
@@ -62,7 +62,7 @@
             <img src="{{item.src}}"/>
         </div>
         <footer>
-            <div class="mwf_back mwf-imgbutton mwf-img-backward"></div>
+            <div class="mwf_back mwf-imgbutton mwf-img-backward" on-click="backToList"></div>
         </footer>
     </div>
 </div>
