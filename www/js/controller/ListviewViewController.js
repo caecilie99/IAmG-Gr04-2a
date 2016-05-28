@@ -39,7 +39,10 @@ define(["mwf","entities"], function(mwf, entities) {
                     this.application.switchCRUD("remote")
                 else
                     this.application.switchCRUD("local");
-                this.application.readAll();
+                // Auslagern in Funktion ???
+                entities.MediaItem.readAll(function(items){
+                    this.initialiseListview(items);
+                }.bind(this));
             }.bind(this);
 
             entities.MediaItem.readAll(function(items){
@@ -110,9 +113,26 @@ define(["mwf","entities"], function(mwf, entities) {
          * Loescht ein Element
          */
         this.deleteItem = function(item){
-            item.delete(function(){
-                //this.removeFromListview(item._id);
-            }.bind(this));
+            item.delete();
+        }
+
+        /*
+         * Loescht ein Element
+         */
+        this.askAndDeleteItem = function(item){
+            this.showDialog("deleteItemDialog", {
+                item: item,
+                actionBindings: {
+                    submitForm: function(event){
+                        event.original.preventDefault();
+                        item.delete();
+                        this.hideDialog();
+                    }.bind(this),
+                    cancel: function(event){
+                        this.hideDialog();
+                    }.bind(this)
+                }
+            });
         }
 
         /*

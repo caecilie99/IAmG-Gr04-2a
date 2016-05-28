@@ -15,7 +15,7 @@ define(["mwfUtils", "EntityManager"], function (mwfUtils, EntityManager) {
         // Name
         this.name = name;
         // Beschreibung
-        this.description;
+        this.description = 'Lorem Ipsum irgendwas';
         // Datum
         this.added = Date.now();
         // URL
