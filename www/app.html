@@ -81,7 +81,11 @@
             <div class="mwf-imgbutton mwf-img-sandwich mwf-left-align"></div>
             <h2 class="mwf-left-align">{{#if item.created}}Medium editieren: {{item.name}}{{else}}Neues Medium{{/if}}</h2>
             <input form="tagNameEditForm" type="submit" value="Speichern" class="mwf-right-align mwf-imgbutton mwf-img-disk" />
-            <div class="mwf-imgbutton mwf-img-delete mwf-right-align {{#if !item.created}}mwf-disabled{{/if}}" on-click="deleteItem"> </div>
+            {{#if item.created}}
+            <div class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"> </div>
+            {{else}}
+            <div class="mwf-imgbutton mwf-img-delete mwf-right-align mwf-disabled"> </div>
+            {{/if}}
         </header>
         <div class="mwf-body mwf-scrollview">
             <form id="tagNameEditForm" on-submit="submitForm">
