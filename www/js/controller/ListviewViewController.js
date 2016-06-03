@@ -41,10 +41,10 @@ define(["mwf", "entities"], function (mwf, entities) {
             switchDatabaseElement.onclick = function () {
                 if (this.application.currentCRUDScope == 'local') {
                     this.application.switchCRUD('remote');
-//                    alert(this.application.currentCRUDScope);
+                    //alert(this.application.currentCRUDScope);
                 } else {
                     this.application.switchCRUD('local');
-//                    alert(this.application.currentCRUDScope);
+                    //alert(this.application.currentCRUDScope);
                 }
                 entities.MediaItem.readAll(function (items) {
                     this.initialiseListview(items);
@@ -107,12 +107,27 @@ define(["mwf", "entities"], function (mwf, entities) {
 
 
         this.deleteItem = function (item) {
-            item.delete(function () {
+            item.delete();//function (){
                 //    this.removeFromListview(item._id);
-            }.bind(this));
+            //}.bind(this));
         }
 
-
+        this.askAndDeleteItem = function(item){
+            this.showDialog("deleteItemDialog", {
+                item: item, actionBindings: {
+                    submitForm: function (event) {
+                        event.original.preventDefault();
+                        this.hideDialog();
+                    }.bind(this)
+                    , /*!!!*/
+                    deleteItem: function (event) {
+                        this.deleteItem(item);
+                        this.hideDialog();
+                    }.bind(this)
+                }
+            });
+        }
+        
         this.editItem = function (item) {
             this.showDialog("mediaItemDialog", {
                 item: item, actionBindings: {
