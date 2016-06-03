@@ -3,11 +3,11 @@
  */
 define(["mwf","entities"], function(mwf, entities) {
 
-    function ReadviewViewController() {
-        console.log("ReadviewViewController()");
+    function EditviewViewController() {
+        console.log("EditviewViewController()");
 
         // declare a variable for accessing the prototype object (used für super() calls)
-        var proto = ReadviewViewController.prototype;
+        var proto = EditviewViewController.prototype;
 
         /*
          * for any view: initialise the view
@@ -16,13 +16,23 @@ define(["mwf","entities"], function(mwf, entities) {
         this.oncreate = function (callback) {
             // TODO: do databinding, set listeners, initialise the view
             var mediaItem = this.args.item;
-            viewProxy = this.bindElement('mediaReadviewTemplate', {item: mediaItem}, this.root).viewProxy;
+            viewProxy = this.bindElement('mediaEditviewTemplate', {item: mediaItem}, this.root).viewProxy;
             viewProxy.bindAction("deleteItem", function(){
                 mediaItem.delete(function () {
-                    //this.notifyListeners(new mwf.Event("crud", "deleted", "MediaItem", mediaItem._id));
                     this.previousView();
                 }.bind(this))
             }.bind(this));
+
+            viewProxy.bindAction("submitForm", function(event){
+                event.original.preventDefault();
+                if (mediaItem.created)
+                    mediaItem.update();
+                else
+                    mediaItem.create();
+                this.previousView();
+            }.bind(this));
+
+            this.root.getElementsByTagName("img")[0].src = mediaItem.src;
 
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
@@ -34,6 +44,7 @@ define(["mwf","entities"], function(mwf, entities) {
          */
         this.bindListItemView = function (viewid, itemview, item) {
             // TODO: implement how attributes of item shall be displayed in itemview
+
         }
 
         /*
@@ -61,11 +72,13 @@ define(["mwf","entities"], function(mwf, entities) {
             proto.bindDialog.call(this,dialogid,dialog,item);
             // TODO: implement action bindings for dialog, accessing dialog.root
         }
+
+
     }
 
     // extend the view controller supertype
-    mwf.xtends(ReadviewViewController,mwf.ViewController);
+    mwf.xtends(EditviewViewController,mwf.ViewController);
 
     // and return the view controller function
-    return ReadviewViewController;
+    return EditviewViewController;
 });

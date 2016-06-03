@@ -96,8 +96,10 @@ define(["mwf","entities"], function(mwf, entities) {
          * Fuegt ein neues Element hinzu
          */
         this.createNewItem = function(){
-            var newItem = new entities.MediaItem("", "http://lorempixel.com/50/50");
-            this.showDialog("mediaItemDialog", {
+            var newItem = new entities.MediaItem("", "http://lorempixel.com/200/200");
+            this.nextView("mediaEditview",{item: newItem});
+/*
+            this.showDialog("mediaEditviewTemplate", {
                 item: newItem,
                 actionBindings: {
                     submitForm: function(event){
@@ -107,10 +109,11 @@ define(["mwf","entities"], function(mwf, entities) {
                     }.bind(this)
                 }
             });
+*/
         }
 
         /*
-         * Loescht ein Element
+         * Loescht ein Element ohne Nachfrage
          */
         this.deleteItem = function(item){
             item.delete();
