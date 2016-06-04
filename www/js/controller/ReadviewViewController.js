@@ -29,6 +29,18 @@ define(["mwf","entities"], function(mwf, entities) {
                 this.nextView("mediaEditview",{item: mediaItem});
             }.bind(this));
 
+            // we add an event listener that listens to updates of Note items
+            this.addListener(new mwf.EventMatcher("crud","updated","MediaItem"),function(event){
+                viewProxy.update(this.args);
+            });
+            // we add another listener that will be executed also onpause and that marks the current controller as obsolete if an item has been deleted
+            // (this is for skipping this view in case we run delete from the editview)
+            this.addListener(new mwf.EventMatcher("crud","deleted","MediaItem"),function(event){
+                // check whether the event that is updated is identical to our one (if for whatever reason this was possible...)
+                this.markAsObsolete();
+                /* this is the runOnPause parameter */
+            },true);
+
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
         }
