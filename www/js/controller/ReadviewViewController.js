@@ -24,6 +24,11 @@ define(["mwf","entities"], function(mwf, entities) {
                 }.bind(this))
             }.bind(this));
 
+            // Wechsel in Editieransicht
+            viewProxy.bindAction("editMediaItem", function(){
+                this.nextView("mediaEditview",{item: mediaItem});
+            }.bind(this));
+
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
         }
@@ -61,6 +66,7 @@ define(["mwf","entities"], function(mwf, entities) {
             proto.bindDialog.call(this,dialogid,dialog,item);
             // TODO: implement action bindings for dialog, accessing dialog.root
         }
+
     }
 
     // extend the view controller supertype
