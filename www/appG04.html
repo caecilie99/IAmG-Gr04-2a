@@ -94,9 +94,11 @@
                     <legend>
                         Bild auswählen
                     </legend>
-                    <input type='radio' name='imageSource' value='plain' id="imageURL" checked="checked"><label for="imageURL"></label>URL</label>
-                    <input type='radio' name='imageSource' value='file' id="imageUpload" checked="checked"><label for="imageUpload">Upload</label>
-                    <input type="text" name="src" value="{{item.src}}">
+                    <input type="radio" name="imageSource" value="plain" id="imageURL" checked="checked">
+                    <label for="imageURL">URL</label>
+                    <input type="radio" name="imageSource" value="file" id="imageUpload">
+                    <label for="imageUpload">Upload</label>
+                    <input type="url" name="src" value="{{item.src}}">
                     <img class="mwf-left-align" src=""/>
                 </fieldset>
                 <fieldset>
