@@ -39,7 +39,7 @@ server = http.createServer(function(req, res) {
         else {
             if (path == '/') {
                 // if the root is accessed we serve the main html document
-                path = "app.html";
+                path = "appG04.html";
             }
             // serveable resources will be put in the webcontent directory -- the callback will be passed the data read out from the file being accessed
             fs.readFile(__dirname + "/www/" + path, function (err, data) {
