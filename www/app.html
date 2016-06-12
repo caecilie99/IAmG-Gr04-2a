@@ -33,7 +33,6 @@
         <h2 class="mwf-left-align">Medien</h2>
         <div class="mwf-imgbutton mwf-img-plus mwf-right-align" id="addNewMediaItem"></div>
     </header>
-    <div class="mwf-body">
         <div class="mwf-body mwf-scrollview">
             <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="mediaItemMenu">
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
@@ -48,7 +47,6 @@
                 </li>
             </ul>
         </div>
-    </div>
     <footer>
         <div class="mwf-imgbutton mwf-img-refresh mwf-right-align" id="switchDatabase"></div>
     </footer>
@@ -88,7 +86,7 @@
             <div class="mwf-imgbutton mwf-img-delete mwf-right-align mwf-disabled"> </div>
             {{/if}}
         </header>
-        <div class="mwf-body">
+        <div class="mwf-body mwf-scrollview">
             <form id="tagNameEditForm" on-submit="submitForm" action="http2mdb/content" method="post"
                   enctype="multipart/form-data" target="multipart_target">
                 <fieldset class="mwf-radiogroup">
