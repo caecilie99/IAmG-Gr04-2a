@@ -16,7 +16,7 @@ define(["mwf","entities"], function(mwf, entities) {
         this.oncreate = function (callback) {
             // TODO: do databinding, set listeners, initialise the view
             var mediaItem = this.args.item;
-            viewProxy = this.bindElement('mediaEditviewTemplate', {item: mediaItem}, this.root).viewProxy;
+            viewProxy = this.bindElement('mediaEditviewTemplate', {item: mediaItem, scope:this.application.currentCRUDScope}, this.root).viewProxy;
             viewProxy.bindAction("deleteItem", function(){
                 mediaItem.delete(function () {
                     this.previousView();

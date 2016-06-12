@@ -96,7 +96,7 @@ define(["mwf","entities"], function(mwf, entities) {
          * Fuegt ein neues Element hinzu
          */
         this.createNewItem = function(){
-            var newItem = new entities.MediaItem("", "http://lorempixel.com/200/200");
+            var newItem = new entities.MediaItem("", "http://lorempixel.com/200/200", "plain");
             this.nextView("mediaEditview",{item: newItem});
 /*
             this.showDialog("mediaEditviewTemplate", {

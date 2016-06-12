@@ -1,9 +1,20 @@
 /* TODO: add any application specific styling here */
-#mediaReadview img{
+.mediaReadview img{
     width: 100%;
     max-width: 100%;
 }
+
+.previewimg{
+    padding: inherit;
+}
+
 fieldset.mwf-radiogroup {
     padding: inherit;
     border: 1px solid rgb(120,120,120);
 }
+
+input[type=radio] {
+    width:auto;
+    height:auto;
+}
+
