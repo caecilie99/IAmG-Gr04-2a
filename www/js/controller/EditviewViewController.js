@@ -1,7 +1,7 @@
 /**
  * @author Jörn Kreutel
  */
-define(["mwf","entities"], function(mwf, entities) {
+define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, GenericCRUDImplRemote) {
 
     function EditviewViewController() {
         console.log("EditviewViewController()");
@@ -28,7 +28,11 @@ define(["mwf","entities"], function(mwf, entities) {
                 if (mediaItem.created)
                     mediaItem.update();
                 else
-                    mediaItem.create();
+                {
+                    crudops = GenericCRUDImplRemote.newInstance("MediaItem");
+                    crudops.persistMediaContent(mediaItem, "src", this.root.getElementsByName("src").files[0]);
+                    //mediaItem.create();
+                }
                 this.previousView();
             }.bind(this));
 
