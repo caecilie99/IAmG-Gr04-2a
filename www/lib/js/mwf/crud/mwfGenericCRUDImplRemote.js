@@ -80,7 +80,7 @@ define(["xhr","EntityManager","mwfUtils"], function(xhr,EntityManager,mwfUtils){
                     }
                 }
             }
-            xhr.open("POST","/http2mdb" + baseUrl.call(this));
+            xhr.open("POST","/http2mdb/content" + baseUrl.call(this));
             xhr.send(formdata);
         }
 

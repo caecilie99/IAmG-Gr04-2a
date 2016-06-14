@@ -87,27 +87,27 @@
             {{/if}}
         </header>
         <div class="mwf-body mwf-scrollview">
-            <form id="tagNameEditForm" on-submit="submitForm" action="http2mdb/content" method="post"
-                  enctype="multipart/form-data" target="multipart_target">
+            <form id="tagNameEditForm" action="http2mdb/content" method="post"
+                  enctype="multipart/form-data" target="multipart_target" on-submit="submitForm">
                 <fieldset class="mwf-radiogroup">
                     <legend>
                         Bild auswählen
                     </legend>
-                    <p>The selected value is {{item.contentType}} and {{scope}}.</p>
+                    <p>The selected value is {{item.contentMode}} and {{scope}}.</p>
                     <!--<label><input type="radio" value="plain" name='{{item.contentType}}' >URL</label>
                     <label><input type="radio" value="file" name='{{item.contentType}}' >Upload</label>-->
-                    <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' ><label for="imageURL">URL</label>
+                    <input type='radio' id='imageURL' name='{{item.contentMode}}' value='url' ><label for="imageURL">URL</label>
                     {{#if scope=='local'}}
-                    <input type='radio' id='imageUpload' name='{{item.contentType}}' value='file' disabled="disabled"><label for="imageUpload">Upload</label>
+                    <input type='radio' id='imageUpload' name='{{item.contentMode}}' value='fileupload' disabled="disabled"><label for="imageUpload">Upload</label>
                     {{else}}
-                    <input type='radio' id='imageUpload' name='{{item.contentType}}' value='file'><label for="imageUpload">Upload</label>
+                    <input type='radio' id='imageUpload' name='{{item.contentMode}}' value='fileupload'><label for="imageUpload">Upload</label>
                     {{/if}}
-                    {{#if item.contentType == 'plain'}}
-                    <input type="url" name="src" value="{{item.src}}" required="required">
-                    <input type="file" name="notesContent" class="mwf-idle" />
-                    {{else}}
+                    {{#if item.contentMode == 'fileupload'}}
                     <input type="url" name="src" class="mwf-idle">
-                    <input type="file" name="notesContent" value={{item.contentType}} />
+                    <input type="file" id="src" name="src" value={{item.src}} />
+                    {{else}}
+                    <input type="url" name="src" value="{{item.src}}" required="required">
+                    <input type="file" name="src" class="mwf-idle" />
                     {{/if}}
                 </fieldset>
                 <div class="previewimg mwf-left-align">
@@ -123,7 +123,7 @@
                     <legend>
                         Beschreibung
                     </legend>
-                    <textarea rows="5" value="{{item.description}}"></textarea>
+                    <textarea form="tagNameEditForm" rows="5" value="{{item.description}}"></textarea>
                 </fieldset>
             </form>
         </div>
