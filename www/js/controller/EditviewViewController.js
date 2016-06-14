@@ -31,7 +31,9 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 {
                     crudops = GenericCRUDImplRemote.newInstance("MediaItem");
                     test = document.getElementById("src").files[0];
-                    crudops.persistMediaContent(mediaItem, "src", test);
+                    crudops.persistMediaContent(mediaItem, "src", test, function(item){
+                        item.create();
+                    });
                 //    mediaItem.create();
                 }
 
