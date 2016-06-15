@@ -14,7 +14,7 @@ var http2mdb = require("./njsimpl/http2mdb");
 // the HTTP server
 var server;
 // the port on which the server will be started
-var port = 8393;
+var port = 8304;
 
 // the ip address
 var ip = /*"127.0.0.1";*/utils.getIPAddress();
