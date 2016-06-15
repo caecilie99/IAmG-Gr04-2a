@@ -96,7 +96,7 @@
                     <p>The selected value is {{item.contentMode}} and {{scope}}.</p>
                     <!--<label><input type="radio" value="plain" name='{{item.contentType}}' >URL</label>
                     <label><input type="radio" value="file" name='{{item.contentType}}' >Upload</label>-->
-                    <input type='radio' id='imageURL' name='{{item.contentMode}}' value='url' ><label for="imageURL">URL</label>
+                    <input type='radio' id='imageURL' name='{{item.contentMode}}' value='plain' checked><label for="imageURL">URL</label>
                     {{#if scope=='local'}}
                     <input type='radio' id='imageUpload' name='{{item.contentMode}}' value='fileupload' disabled="disabled"><label for="imageUpload">Upload</label>
                     {{else}}
@@ -104,15 +104,21 @@
                     {{/if}}
                     {{#if item.contentMode == 'fileupload'}}
                     <input type="url" name="src" class="mwf-idle">
-                    <input type="file" id="src" name="src" value={{item.src}} />
+                    <input type="file" id="src" name="src" value={{item.src}} onchange="loadFile(event)" />
                     {{else}}
                     <input type="url" name="src" value="{{item.src}}" required="required">
                     <input type="file" name="src" class="mwf-idle" />
                     {{/if}}
                 </fieldset>
                 <div class="previewimg mwf-left-align">
-                    <img class="mwf-left-align" src=""/>
+                    <img id="previmg" class="mwf-left-align"/>
                 </div>
+                <script>
+                    var loadFile = function(event) {
+                        var previmg = document.getElementById('previmg');
+                        previmg.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
                 <fieldset>
                     <legend>
                         Titel

@@ -417,6 +417,11 @@ fieldset img {
     max-height: 200px;
 }
 
+#previmg {
+    max-width: 200px;
+    max-height: 200px;
+}
+
 /*
  * toasts - TODO: handle short/long by adding classes 'long' and ' short'
  */
