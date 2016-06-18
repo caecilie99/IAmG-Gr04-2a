@@ -44,11 +44,13 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 this.previousView();
             }.bind(this));
 
-            document.getElementById("imageURL").setAttribute("checked","checked");
+            if(document.getElementById("imageURL").checked){
+                document.getElementById("imageURL").setAttribute("checked","checked");
+            }else{
+                document.getElementById("imageUpload").setAttribute("checked","checked");
+            }
             this.root.getElementsByTagName("img")[0].src = mediaItem.src;
-            console.log("Radio-URL checked? => " + document.getElementById("imageURL").checked);
-            console.log("Radio-Upload checked? => " + document.getElementById("imageUpload").checked);
-
+            
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
         }
