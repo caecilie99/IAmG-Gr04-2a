@@ -417,9 +417,12 @@ fieldset img {
     max-height: 200px;
 }
 
-#previmg {
+#previmg1 {
     max-width: 200px;
     max-height: 200px;
+}
+#previmg2{
+    max-width: 100%;
 }
 
 /*
