@@ -141,7 +141,7 @@ define(["mwf","entities"], function(mwf, entities) {
         /*
          * Aendert den Namen eines Elementes
          */
- /*       this.editItem = function(item){
+        this.editItem = function(item){
             this.showDialog("mediaItemDialog", {
                 item: item,
                 actionBindings: {
@@ -156,7 +156,7 @@ define(["mwf","entities"], function(mwf, entities) {
                     }.bind(this)
                 }
             });
-        }*/
+        }
 
         /*
          * Rückkehr von Subview
