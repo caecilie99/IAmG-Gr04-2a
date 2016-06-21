@@ -62,7 +62,7 @@
             <div class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"></div>
         </header>
         <div class="mwf-body mwf-scrollview">
-            <img src="{{item.src}}"/>
+            <img id="previmg2" src="{{item.src}}"/><br>
             <div class="mwf-li-titleblock">
                 <h3>{{item.description}}</h3>
             </div>
@@ -93,29 +93,29 @@
                     <legend>
                         Bild auswählen
                     </legend>
-                    <p>The selected value is {{item.contentMode}} and {{scope}}.</p>
+                    <!--p>The selected value is {{item.contentMode}} and {{scope}}.</p-->
                     <!--<label><input type="radio" value="plain" name='{{item.contentType}}' >URL</label>
                     <label><input type="radio" value="file" name='{{item.contentType}}' >Upload</label>-->
-                    <input type='radio' id='imageURL' name='{{item.contentMode}}' value='plain' checked><label for="imageURL">URL</label>
+                    <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' checked><label for="imageURL">URL</label>
                     {{#if scope=='local'}}
-                    <input type='radio' id='imageUpload' name='{{item.contentMode}}' value='fileupload' disabled="disabled"><label for="imageUpload">Upload</label>
+                    <input type='radio' id='imageUpload' name='{{item.contentType}}' disabled="disabled"><label for="imageUpload">Upload</label>
                     {{else}}
-                    <input type='radio' id='imageUpload' name='{{item.contentMode}}' value='fileupload'><label for="imageUpload">Upload</label>
+                    <input type='radio' id='imageUpload' name='{{item.contentType}}'><label for="imageUpload">Upload</label>
                     {{/if}}
-                    {{#if item.contentMode == 'fileupload'}}
-                    <input type="url" name="src" class="mwf-idle">
-                    <input type="file" id="src" name="src" value={{item.src}} onchange="loadFile(event)" />
-                    {{else}}
+                    {{#if item.contentType == 'plain'}}
                     <input type="url" name="src" value="{{item.src}}" required="required">
                     <input type="file" name="src" class="mwf-idle" />
+                    {{else}}
+                    <input type="url" name="src" class="mwf-idle">
+                    <input type="file" id="src" name="src" value={{item.src}} onchange="loadFile(event)" />
                     {{/if}}
                 </fieldset>
                 <div class="previewimg mwf-left-align">
-                    <img id="previmg" class="mwf-left-align"/>
+                    <img id="previmg1" class="mwf-left-align"/>
                 </div>
                 <script>
                     var loadFile = function(event) {
-                        var previmg = document.getElementById('previmg');
+                        var previmg = document.getElementById('previmg1');
                         previmg.src = URL.createObjectURL(event.target.files[0]);
                     };
                 </script>

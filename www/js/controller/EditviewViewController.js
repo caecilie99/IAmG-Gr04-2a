@@ -16,8 +16,8 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
         this.oncreate = function (callback) {
             // TODO: do databinding, set listeners, initialise the view
             var mediaItem = this.args.item;
-
             viewProxy = this.bindElement('mediaEditviewTemplate', {item: mediaItem, scope:this.application.currentCRUDScope}, this.root).viewProxy;
+
             viewProxy.bindAction("deleteItem", function(){
                 mediaItem.delete(function () {
                     this.previousView();
@@ -44,10 +44,13 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 this.previousView();
             }.bind(this));
 
+            if(document.getElementById("imageURL").checked){
+                document.getElementById("imageURL").setAttribute("checked","checked");
+            }else{
+                document.getElementById("imageUpload").setAttribute("checked","checked");
+            }
             this.root.getElementsByTagName("img")[0].src = mediaItem.src;
-            console.log("Radio-URL checked? => " + document.getElementById("imageURL").checked);
-            console.log("Radio-Upload checked? => " + document.getElementById("imageUpload").checked);
-
+            
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
         }
