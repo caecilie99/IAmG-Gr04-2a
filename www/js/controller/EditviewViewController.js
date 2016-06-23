@@ -34,13 +34,13 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                         mediaItem.create();
                 }else{
                     crudops = GenericCRUDImplRemote.newInstance("MediaItem");
-                    test = document.getElementById("src").files[0];
+                    filetoupload = document.getElementById("src").files[0];
                     if (mediaItem.created)
-                        crudops.persistMediaContent(mediaItem, "src", test, function(item){
+                        crudops.persistMediaContent(mediaItem, "src", filetoupload, function(item){
                             item.update();
                         });
                     else
-                        crudops.persistMediaContent(mediaItem, "src", test, function(item){
+                        crudops.persistMediaContent(mediaItem, "src", filetoupload, function(item){
                             item.create();
                         });
 
