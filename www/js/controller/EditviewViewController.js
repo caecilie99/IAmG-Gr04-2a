@@ -26,19 +26,24 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
 
             viewProxy.bindAction("submitForm", function(event){
                 event.original.preventDefault();
-                if (mediaItem.created)
-                    mediaItem.update();
-                else
-                {
-                    if(document.getElementById("imageURL").checked){
+
+                if(document.getElementById("imageURL").checked){
+                    if (mediaItem.created)
+                        mediaItem.update();
+                    else
                         mediaItem.create();
-                    }else{
-                        crudops = GenericCRUDImplRemote.newInstance("MediaItem");
-                        test = document.getElementById("src").files[0];
+                }else{
+                    crudops = GenericCRUDImplRemote.newInstance("MediaItem");
+                    test = document.getElementById("src").files[0];
+                    if (mediaItem.created)
+                        crudops.persistMediaContent(mediaItem, "src", test, function(item){
+                            item.update();
+                        });
+                    else
                         crudops.persistMediaContent(mediaItem, "src", test, function(item){
                             item.create();
                         });
-                    }
+
                 }
 
                 this.previousView();
