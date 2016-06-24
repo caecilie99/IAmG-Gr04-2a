@@ -43,7 +43,8 @@ define(["mwfUtils", "EntityManager"], function (mwfUtils, EntityManager) {
             if (this.contentType) {
                 var index = this.contentType.indexOf("/");
                 if (index > -1) {
-                    return this.contentType.substring(0, index);
+                    test=this.contentType.substring(0, index);
+                    return test;
                 }
                 else {
                     return "UNKNOWN";

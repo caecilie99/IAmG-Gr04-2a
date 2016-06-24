@@ -24,6 +24,23 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 }.bind(this))
             }.bind(this));
 
+            // erzeuge eine Instanz von FileReader
+            var reader = new FileReader();
+            // deklariere eine Callback-Funktion, der die auszulesenden Daten in einem
+            // event Objekt übergeben werden
+            reader.onload = function(event) {
+                // Hier muss noch die richtige Vorschau gesetzt werden
+                this.root.getElementsByTagName("img")[0].src = event.target.result;
+            }.bind(this);
+
+            viewProxy.bindAction("changeFile", function(){
+                // rufe die Auslesefunktion für Data URLs auf
+                // hier muesste noch abhängig vom Typ das HTML-Markup verändert werden
+                filetoupload = document.getElementById("src").files[0];
+                reader.readAsDataURL(filetoupload);
+
+            }.bind(this));
+
             viewProxy.bindAction("submitForm", function(event){
                 event.original.preventDefault();
 
@@ -54,12 +71,19 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
             }else{
                 document.getElementById("imageUpload").setAttribute("checked","checked");
             }
-            this.root.getElementsByTagName("img")[0].src = mediaItem.src;
-            
+            // Setze Mediainhalt abhängig von Typ
+            this.setMediaElement(mediaItem);
+
             // call the superclass once creation is done
             proto.oncreate.call(this,callback);
         }
 
+        this.setMediaElement = function(mediaItem){
+            if (mediaItem.mediaType=='image')
+                this.root.getElementsByTagName("img")[0].src = mediaItem.src;
+            if (mediaItem.mediaType=='video')
+                this.root.getElementsByTagName("video")[0].src = mediaItem.src;
+        }
         /*
          * for views with listviews: bind a list item to an item view
          * TODO: delete if no listview is used or if databinding uses ractive templates

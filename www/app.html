@@ -62,7 +62,15 @@
             <div class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"></div>
         </header>
         <div class="mwf-body mwf-scrollview">
+            {{#if item.mediaType=='image'}}
             <img id="previmg2" src="{{item.src}}"/><br>
+            {{/if}}
+            {{#if item.mediaType=='video'}}
+            <video controls>
+                <source src="{{item.src}}">
+            </video>
+            <br>
+            {{/if}}
             <div class="mwf-li-titleblock">
                 <h3>{{item.description}}</h3>
             </div>
@@ -107,11 +115,20 @@
                     <input type="file" name="src" class="mwf-idle" />
                     {{else}}
                     <input type="url" name="src" class="mwf-idle">
-                    <input type="file" id="src" name="src" value={{item.src}} onchange="loadFile(event)" />
+                    <!--<input type="file" id="src" name="src" value={{item.src}} onchange="loadFile(event)" />-->
+                    <input type="file" id="src" name="src" value={{item.src}} on-change="changeFile" />
                     {{/if}}
                 </fieldset>
                 <div class="previewimg mwf-left-align">
-                    <img id="previmg1" class="mwf-left-align"/>
+                    {{#if item.mediaType=='video'}}
+                    <video controls>
+                        <source>
+                    </video>
+                    <br>
+                    {{else}}
+                    <img id="previmg1" class="mwf-left-align"/><br>
+                    {{/if}}
+
                 </div>
                 <script>
                     var loadFile = function(event) {
