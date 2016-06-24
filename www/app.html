@@ -20,6 +20,7 @@
     -->
     <!-- ractive templating engine -->
     <script src="lib/js/external/ractive.min.js"></script>
+    <script src="js/my.js"></script>
     <!-- user require.js for local script loading -->
     <script data-main="js/Main.js" src="lib/js/external/require.js"></script>
 </head>
@@ -36,7 +37,15 @@
         <div class="mwf-body mwf-scrollview">
             <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="mediaItemMenu">
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
+                    {{#if mediaType=='video'}}
+                    <!--<video class="mwf-left-align"  preload="none" poster="content/img/noimg.jpg">-->
+                    <video class="mwf-left-align">
+                        <source src="{{src}}" type="{{contentType}}">
+                    </video>
+                    {{/if}}
+                    {{#if mediaType=='image'}}
                     <img class="mwf-left-align" src="{{src}}">
+                    {{/if}}
                     <div class="mwf-li-titleblock">
                         <h2>{{name}}{{_id}}</h2>
                         <h3>{{addedDateString}}</h3>
@@ -67,7 +76,7 @@
             {{/if}}
             {{#if item.mediaType=='video'}}
             <video controls>
-                <source src="{{item.src}}">
+                <source src="{{item.src}}" type="{{item.contentType}}">
             </video>
             <br>
             {{/if}}
@@ -116,26 +125,18 @@
                     {{else}}
                     <input type="url" name="src" class="mwf-idle">
                     <!--<input type="file" id="src" name="src" value={{item.src}} onchange="loadFile(event)" />-->
-                    <input type="file" id="src" name="src" value={{item.src}} on-change="changeFile" />
+                    <input type="file" id="src" name="src" value={{item.src}} onchange="fileSelected();" />
+                    <!--input type="file" id="src" name="src" value={{item.src}} on-change="changeFile" /-->
                     {{/if}}
                 </fieldset>
-                <div class="previewimg mwf-left-align">
-                    {{#if item.mediaType=='video'}}
-                    <video controls>
-                        <source>
+                <div id="preview" class="previewimg mwf-left-align">
+                    <!--<video id="prevvideo" poster="content/img/noimg.jpg" class="mwf-idle">-->
+                    <video id="prevvideo" poster="content/img/noimg.jpg" class="mwf-idle">
+                        <source id="prevvideoSRC">
                     </video>
                     <br>
-                    {{else}}
-                    <img id="previmg1" class="mwf-left-align"/><br>
-                    {{/if}}
-
+                    <img id="previmg1" class="mwf-idle"/><br>
                 </div>
-                <script>
-                    var loadFile = function(event) {
-                        var previmg = document.getElementById('previmg1');
-                        previmg.src = URL.createObjectURL(event.target.files[0]);
-                    };
-                </script>
                 <fieldset>
                     <legend>
                         Titel
