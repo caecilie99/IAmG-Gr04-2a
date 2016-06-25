@@ -34,6 +34,6 @@ input[type=radio] {
 li video {
     width: 50px;
     max-height: 50px;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
