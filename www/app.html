@@ -38,14 +38,14 @@
             <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="mediaItemMenu">
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
                     {{#if mediaType=='video'}}
+                    <div id="bereich">
                     <!--<video class="mwf-left-align"  preload="none" poster="content/img/noimg.jpg">-->
+                    <div id="overlay" class="mwf-icon mwf-left-align mwf-img-play"></div>
                     <video class="mwf-left-align">
                         <source src="{{src}}" type="{{contentType}}">
                     </video>
-                    <div class="mwf-icon mwf-left-align mwf-img-play-button">
-
                     </div>
-                    <!--<div class="mwf-left-align mwf-imgbutton mwf-img-play"></div>-->
+                    <!--<div class="mwf-icon mwf-left-align mwf-img-play-button"></div>-->
                     {{else}}
                     <img class="mwf-left-align" src="{{src}}">
                     {{/if}}

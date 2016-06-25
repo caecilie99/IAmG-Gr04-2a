@@ -45,3 +45,14 @@ li video {
     margin: 0;
     padding: 0;
 }
+#bereich{
+    display: inline-block;
+    position: relative;
+}
+#overlay{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    margin-top: 8px;
+
+}
