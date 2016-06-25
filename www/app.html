@@ -123,14 +123,13 @@
                     <input type="file" name="src" class="mwf-idle" />
                     {{else}}
                     <input type="url" name="src" class="mwf-idle">
-                    <!--<input type="file" id="src" name="src" value={{item.src}} onchange="loadFile(event)" />-->
-                    <input type="file" id="src" name="src" value={{item.src}} onchange="fileSelected();" />
-                    <!--input type="file" id="src" name="src" value={{item.src}} on-change="changeFile" /-->
+                    <!--<input type="file" id="src" name="src" value={{item.src}} onchange="fileSelected();" />-->
+                    <input type="file" id="src" name="src" value={{item.src}} on-change="changeFile">
                     {{/if}}
                 </fieldset>
                 <div id="preview" class="previewimg">
                     <!--<video id="prevvideo" poster="content/img/noimg.jpg" class="mwf-idle">-->
-                    <video id="prevvideo1" class="mwf-idle" controls>
+                    <video id="prevvideo1" controls>
                         <source id="prevvideoSRC">
                     </video>
                     <img id="previmg1"/><br>

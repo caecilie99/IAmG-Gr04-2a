@@ -24,21 +24,8 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 }.bind(this))
             }.bind(this));
 
-            // erzeuge eine Instanz von FileReader
-            var reader = new FileReader();
-            // deklariere eine Callback-Funktion, der die auszulesenden Daten in einem
-            // event Objekt übergeben werden
-            reader.onload = function(event) {
-                // Hier muss noch die richtige Vorschau gesetzt werden
-                this.root.getElementsByTagName("img")[0].src = event.target.result;
-            }.bind(this);
-
             viewProxy.bindAction("changeFile", function(){
-                // rufe die Auslesefunktion für Data URLs auf
-                // hier muesste noch abhängig vom Typ das HTML-Markup verändert werden
-                filetoupload = document.getElementById("src").files[0];
-                reader.readAsDataURL(filetoupload);
-
+                this.fileSelected();
             }.bind(this));
 
             viewProxy.bindAction("submitForm", function(event){
@@ -80,11 +67,56 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
             proto.oncreate.call(this,callback);
         }
 
+        this.fileSelected = function() {
+            console.log("WO BIN ICH ??");
+
+            // get selected file element
+            var oFile = document.getElementById("src").files[0];
+
+            console.log("oFile: " + oFile.type);
+
+            if (oFile.type.match(/^video\/.*$/)) {
+                // get preview element
+                console.log("video entdeckt");
+
+                var videoTag = document.getElementById("prevvideo1");
+                var oImage = document.getElementById("prevvideoSRC");
+                oImage.type = oFile.type;
+                videoTag.classList.remove("mwf-idle");
+
+                document.getElementById("previmg1").classList.add("mwf-idle");
+            }
+            else {
+                // get preview element
+                console.log("image entdeckt");
+                var oImage = document.getElementById("previmg1");
+                oImage.classList.remove("mwf-idle");
+                document.getElementById("prevvideo1").classList.add("mwf-idle");
+            }
+
+            // prepare HTML5 FileReader
+            var oReader = new FileReader();
+            oReader.onload = function (e) {
+                console.log("HIER ??");
+                // e.target.result contains the DataURL which we will use as a source of the image
+                oImage.src = e.target.result;
+                if(oImage.type.match(/^video\/.*$/)) {
+                    document.getElementById('prevvideo1').load();
+                }
+            };
+            // read selected file as DataURL
+            oReader.readAsDataURL(oFile);
+        }// end of fucntion
+
         this.setMediaElement = function(mediaItem){
-            if (mediaItem.mediaType=='image')
+            if (mediaItem.mediaType=='image'){
                 this.root.getElementsByTagName("img")[0].src = mediaItem.src;
-            if (mediaItem.mediaType=='video')
+                document.getElementById("prevvideo1").classList.add("mwf-idle");
+            }
+            if (mediaItem.mediaType=='video'){
                 this.root.getElementsByTagName("video")[0].src = mediaItem.src;
+                document.getElementById("previmg1").classList.add("mwf-idle");
+            }
         }
         /*
          * for views with listviews: bind a list item to an item view
