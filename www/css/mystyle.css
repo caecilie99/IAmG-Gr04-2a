@@ -26,7 +26,6 @@ input[type=radio] {
 .mwf-listitem .mwf-img-play-button{
     position: absolute;
     left: 0;
-    bottom: 0;
     padding: 0;
     filter: invert(90%);
     -webkit-filter: invert(90%);
