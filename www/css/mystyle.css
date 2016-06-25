@@ -45,14 +45,21 @@ li video {
     margin: 0;
     padding: 0;
 }
-#bereich{
+#videoDiv{
     display: inline-block;
     position: relative;
 }
-#overlay{
+#overlayPlay{
     position: absolute;
-    left: 0px;
+    left: 3px;
     top: 0px;
-    margin-top: 8px;
-
+    margin-top: 18px;
+    background: url("../lib/css/img/glyphicons/png/glyphicons-174-play.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 13px;
+    height: 13px;
+    padding: 0px;
+    color: limegreen;
 }

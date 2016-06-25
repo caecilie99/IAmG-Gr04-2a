@@ -38,9 +38,9 @@
             <ul class="mwf-listview" data-mwf-listitem-view="myapp-listitem" data-mwf-listitem-menu="mediaItemMenu">
                 <li class="mwf-listitem mwf-li-title-subtitle mwf-template mwf-databind" data-mwf-templatename="myapp-listitem" data-mwf-targetview="mediaReadview">
                     {{#if mediaType=='video'}}
-                    <div id="bereich">
+                    <div id="videoDiv">
                     <!--<video class="mwf-left-align"  preload="none" poster="content/img/noimg.jpg">-->
-                    <div id="overlay" class="mwf-icon mwf-left-align mwf-img-play"></div>
+                    <div id="overlayPlay"></div>
                     <video class="mwf-left-align">
                         <source src="{{src}}" type="{{contentType}}">
                     </video>
