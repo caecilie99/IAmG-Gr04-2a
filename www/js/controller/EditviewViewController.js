@@ -45,11 +45,13 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 event.original.preventDefault();
 
                 if(document.getElementById("imageURL").checked){
+                    console.log(mediaItem.src);
                     if (mediaItem.created)
                         mediaItem.update();
                     else
                         mediaItem.create();
                 }else{
+                    console.log("Upload");
                     crudops = GenericCRUDImplRemote.newInstance("MediaItem");
                     filetoupload = document.getElementById("src").files[0];
                     if (mediaItem.created)

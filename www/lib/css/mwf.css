@@ -417,14 +417,6 @@ fieldset img {
     max-height: 200px;
 }
 
-#previmg1 {
-    max-width: 200px;
-    max-height: 200px;
-}
-#previmg2{
-    max-width: 100%;
-}
-
 /*
  * toasts - TODO: handle short/long by adding classes 'long' and ' short'
  */
@@ -564,12 +556,7 @@ li img {
     padding: 0px;
 }
 
-li video {
-    width: 50px;
-    max-height: 50px;
-    margin: 0px;
-    padding: 0px;
-}
+
 
 li input {
     width: 50px;

@@ -42,8 +42,7 @@
                     <video class="mwf-left-align">
                         <source src="{{src}}" type="{{contentType}}">
                     </video>
-                    {{/if}}
-                    {{#if mediaType=='image'}}
+                    {{else}}
                     <img class="mwf-left-align" src="{{src}}">
                     {{/if}}
                     <div class="mwf-li-titleblock">
@@ -71,13 +70,12 @@
             <div class="mwf-imgbutton mwf-img-delete mwf-right-align" on-click="deleteItem"></div>
         </header>
         <div class="mwf-body mwf-scrollview">
-            {{#if item.mediaType=='image'}}
-            <img id="previmg2" src="{{item.src}}"/><br>
-            {{/if}}
             {{#if item.mediaType=='video'}}
-            <video controls>
+            <video id="prevvideo2" controls>
                 <source src="{{item.src}}" type="{{item.contentType}}">
             </video>
+            {{else}}
+            <img id="previmg2" src="{{item.src}}"/><br>
             <br>
             {{/if}}
             <div class="mwf-li-titleblock">
@@ -115,12 +113,12 @@
                     <label><input type="radio" value="file" name='{{item.contentType}}' >Upload</label>-->
                     <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' checked><label for="imageURL">URL</label>
                     {{#if scope=='local'}}
-                    <input type='radio' id='imageUpload' name='{{item.contentType}}' disabled="disabled"><label for="imageUpload">Upload</label>
+                    <input type='radio' id='imageUpload' name='{{item.contentType}}' disabled="disabled" onchange="setRadioEnv();"><label for="imageUpload">Upload</label>
                     {{else}}
-                    <input type='radio' id='imageUpload' name='{{item.contentType}}'><label for="imageUpload">Upload</label>
+                    <input type='radio' id='imageUpload' name='{{item.contentType}}' onchange="setRadioEnv();"><label for="imageUpload">Upload</label>
                     {{/if}}
                     {{#if item.contentType == 'plain'}}
-                    <input type="url" name="src" value="{{item.src}}" required="required">
+                    <input id="src" type="url" name="src" value="{{item.src}}" required="required">
                     <input type="file" name="src" class="mwf-idle" />
                     {{else}}
                     <input type="url" name="src" class="mwf-idle">
@@ -129,13 +127,12 @@
                     <!--input type="file" id="src" name="src" value={{item.src}} on-change="changeFile" /-->
                     {{/if}}
                 </fieldset>
-                <div id="preview" class="previewimg mwf-left-align">
+                <div id="preview" class="previewimg">
                     <!--<video id="prevvideo" poster="content/img/noimg.jpg" class="mwf-idle">-->
-                    <video id="prevvideo" poster="content/img/noimg.jpg" class="mwf-idle">
+                    <video id="prevvideo1" class="mwf-idle" controls>
                         <source id="prevvideoSRC">
                     </video>
-                    <br>
-                    <img id="previmg1" class="mwf-idle"/><br>
+                    <img id="previmg1"/><br>
                 </div>
                 <fieldset>
                     <legend>

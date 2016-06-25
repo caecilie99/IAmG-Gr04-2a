@@ -26,3 +26,14 @@ input[type=radio] {
 .mwf-li-titleblock h2 {
     white-space: nowrap;
 }
+
+#previmg1, #previmg2, #prevvideo1, #prevvideo2 {
+    max-width: 100%;
+}
+
+li video {
+    width: 50px;
+    max-height: 50px;
+    margin: 0px;
+    padding: 0px;
+}
