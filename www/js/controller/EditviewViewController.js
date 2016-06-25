@@ -28,6 +28,17 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 this.fileSelected();
             }.bind(this));
 
+            viewProxy.bindAction("setRadioEnv", function(){
+                if(document.getElementById("imageURL").checked){
+                    document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");
+                    document.getElementById("previmg1").classList.remove("mwf-idle");
+                    document.getElementById("prevvideo1").classList.add("mwf-idle");
+                }else{
+                    document.getElementById("previmg1").classList.add("mwf-idle");
+                    document.getElementById("prevvideo1").classList.remove("mwf-idle");
+                }
+            }.bind(this));
+
             viewProxy.bindAction("submitForm", function(event){
                 event.original.preventDefault();
 
