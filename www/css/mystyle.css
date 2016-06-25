@@ -23,6 +23,15 @@ input[type=radio] {
     height:auto;
 }
 
+.mwf-listitem .mwf-img-play-button{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0;
+    filter: invert(90%);
+    -webkit-filter: invert(90%);
+    z-index: 2;
+}
 .mwf-li-titleblock h2 {
     white-space: nowrap;
 }

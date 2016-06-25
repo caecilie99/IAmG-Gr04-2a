@@ -42,6 +42,9 @@
                     <video class="mwf-left-align">
                         <source src="{{src}}" type="{{contentType}}">
                     </video>
+                    <div class="mwf-imgbutton mwf-left-align mwf-img-play-button">
+
+                    </div>
                     <!--<div class="mwf-left-align mwf-imgbutton mwf-img-play"></div>-->
                     {{else}}
                     <img class="mwf-left-align" src="{{src}}">
@@ -109,9 +112,6 @@
                     <legend>
                         Bild auswählen
                     </legend>
-                    <!--p>The selected value is {{item.contentMode}} and {{scope}}.</p-->
-                    <!--<label><input type="radio" value="plain" name='{{item.contentType}}' >URL</label>
-                    <label><input type="radio" value="file" name='{{item.contentType}}' >Upload</label>-->
                     {{#if scope=='local'}}
                     <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' checked><label for="imageURL">URL</label>
                     <input type='radio' id='imageUpload' name='{{item.contentType}}' disabled="disabled"><label for="imageUpload">Upload</label>
