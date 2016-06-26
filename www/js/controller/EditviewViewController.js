@@ -68,6 +68,8 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
 
             if(document.getElementById("imageURL").checked){
                 document.getElementById("imageURL").setAttribute("checked","checked");
+                document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");
+                document.getElementById("previmg1").classList.remove("mwf-idle");
             }else{
                 document.getElementById("imageUpload").setAttribute("checked","checked");
             }
