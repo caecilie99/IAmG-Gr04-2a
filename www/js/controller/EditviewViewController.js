@@ -30,7 +30,7 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
 
             viewProxy.bindAction("setRadioEnv", function(){
                 if(document.getElementById("imageURL").checked){
-                    document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");
+/*                    document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");*/
                     document.getElementById("previmg1").classList.remove("mwf-idle");
                     document.getElementById("prevvideo1").classList.add("mwf-idle");
                 }else{
@@ -68,8 +68,8 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
 
             if(document.getElementById("imageURL").checked){
                 document.getElementById("imageURL").setAttribute("checked","checked");
-                document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");
-                document.getElementById("previmg1").classList.remove("mwf-idle");
+/*                document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");
+                document.getElementById("previmg1").classList.remove("mwf-idle");*/
             }else{
                 document.getElementById("imageUpload").setAttribute("checked","checked");
             }
@@ -108,7 +108,6 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
             // prepare HTML5 FileReader
             var oReader = new FileReader();
             oReader.onload = function (e) {
-                console.log("HIER ??");
                 // e.target.result contains the DataURL which we will use as a source of the image
                 oImage.src = e.target.result;
                 if(oImage.type.match(/^video\/.*$/)) {
@@ -120,15 +119,14 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
         }// end of fucntion
 
         this.setMediaElement = function(mediaItem){
-            if (mediaItem.mediaType=='image'){
-                this.root.getElementsByTagName("img")[0].src = mediaItem.src;
-                document.getElementById("prevvideo1").classList.add("mwf-idle");
-            }
             if (mediaItem.mediaType=='video'){
                 this.root.getElementsByTagName("video")[0].src = mediaItem.src;
-                console.log(this.root.getElementsByTagName("video")[0].src);
                 document.getElementById("previmg1").classList.add("mwf-idle");
                 document.getElementById("prevvideo1").classList.remove("mwf-idle");
+            }
+            else{
+                this.root.getElementsByTagName("img")[0].src = mediaItem.src;
+                document.getElementById("prevvideo1").classList.add("mwf-idle");
             }
         }
         /*
