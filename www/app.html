@@ -114,24 +114,24 @@
                         Bild auswählen
                     </legend>
                     {{#if scope=='local'}}
-                    <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' checked><label for="imageURL">URL</label>
+                    <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' checked="checked"><label for="imageURL">URL</label>
                     <input type='radio' id='imageUpload' name='{{item.contentType}}' disabled="disabled"><label for="imageUpload">Upload</label>
                     {{else}}
-                    <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' on-change="setRadioEnv" checked ><label for="imageURL">URL</label>
+                    <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' on-change="setRadioEnv" checked="checked" ><label for="imageURL">URL</label>
                     <input type='radio' id='imageUpload' name='{{item.contentType}}' value='upload' on-change="setRadioEnv"><label for="imageUpload">Upload</label>
                     {{/if}}
-                    {{#if item.contentType == 'plain'}}
-                    <input id="src" type="url" name="src" value="{{item.src}}" required="required">
-                    <input type="file" name="src" class="mwf-idle" />
-                    {{else}}
-                    <input type="url" name="src" class="mwf-idle">
+                    {{#if item.contentType == 'upload'}}
+                    <input type="url" name="url" class="mwf-idle">
                     <!--<input type="file" id="src" name="src" value={{item.src}} onchange="fileSelected();" />-->
                     <input type="file" id="src" name="src" value={{item.src}} on-change="changeFile">
+                    {{else}}
+                    <input type="url" name="url" value="{{item.src}}" required="required">
+                    <input type="file" id="src" name="src" class="mwf-idle" />
                     {{/if}}
                 </fieldset>
                 <div id="preview" class="previewimg">
                     <!--<video id="prevvideo" poster="content/img/noimg.jpg" class="mwf-idle">-->
-                    <video id="prevvideo1" class="mwf-idle" controls>
+                    <video id="prevvideo1" controls>
                         <source id="prevvideoSRC">
                     </video>
                     <img id="previmg1"/><br>

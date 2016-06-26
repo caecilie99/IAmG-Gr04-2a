@@ -66,13 +66,14 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 this.previousView();
             }.bind(this));
 
-            if(document.getElementById("imageURL").checked){
+            document.getElementById("imageURL").setAttribute("checked","checked");
+ /*           if(document.getElementById("imageURL").checked){
                 document.getElementById("imageURL").setAttribute("checked","checked");
-/*                document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");
-                document.getElementById("previmg1").classList.remove("mwf-idle");*/
+/!*                document.getElementById("previmg1").setAttribute("src","http://lorempixel.com/200/200");
+                document.getElementById("previmg1").classList.remove("mwf-idle");*!/
             }else{
                 document.getElementById("imageUpload").setAttribute("checked","checked");
-            }
+            }*/
             // Setze Mediainhalt abhängig von Typ
             this.setMediaElement(mediaItem);
 
