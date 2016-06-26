@@ -1,38 +1,31 @@
 /* TODO: add any application specific styling here */
-.mediaReadview img{
-    width: 100%;
+.mediaReadview img {
+    /*    width: 100%;*/
     max-width: 100%;
 }
 
-video{
-    width: 100%;
+video {
+    /*    width: 100%;*/
     max-width: 100%;
 }
 
-.previewimg{
+.previewimg {
     padding: inherit;
 }
 
 fieldset.mwf-radiogroup {
     padding: inherit;
-    border: 1px solid rgb(120,120,120);
+    border: 1px solid rgb(120, 120, 120);
 }
 
 input[type=radio] {
-    width:auto;
-    height:auto;
+    width: auto;
+    height: auto;
 }
 
-.mwf-listitem .mwf-img-play-button{
-    position: absolute;
-    left: 0;
-    padding: 0;
-    filter: invert(90%);
-    -webkit-filter: invert(90%);
-    z-index: 2;
-}
 .mwf-li-titleblock h2 {
     white-space: nowrap;
+    overflow: scroll;
 }
 
 #previmg1, #previmg2, #prevvideo1, #prevvideo2 {
@@ -45,21 +38,23 @@ li video {
     margin: 0;
     padding: 0;
 }
-#videoDiv{
+
+#videoDiv {
     display: inline-block;
     position: relative;
 }
-#overlayPlay{
+
+#overlayPlay {
     position: absolute;
-    left: 3px;
-    top: 0px;
+    left: 0;
+    top: 0;
     margin-top: 18px;
+    margin-left: 3px;
     background: url("../lib/css/img/glyphicons/png/glyphicons-174-play.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-color: transparent;
-    width: 13px;
-    height: 13px;
-    padding: 0px;
+    width: 16px;
+    height: 18px;
+    padding: 0;
     color: limegreen;
 }
