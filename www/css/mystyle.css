@@ -48,13 +48,12 @@ li video {
     position: absolute;
     left: 0;
     top: 0;
-    margin-top: 18px;
+    margin-top: 60%;
     margin-left: 3px;
-    background: url("../lib/css/img/glyphicons/png/glyphicons-174-play.png");
-    background-position: center;
+    background: url("../lib/css/img/glyphicons/png/glyphicons-221-play-button.png");
     background-repeat: no-repeat;
-    width: 16px;
-    height: 18px;
+    background-size: 65%;
+    width: 26px;
+    height: 26px;
     padding: 0;
-    color: limegreen;
 }
