@@ -25,7 +25,8 @@ input[type=radio] {
 
 .mwf-li-titleblock h2 {
     white-space: nowrap;
-    overflow: scroll;
+    overflow: hidden ;
+/*    overflow: scroll;*/
 }
 
 #previmg1, #previmg2, #prevvideo1, #prevvideo2 {
