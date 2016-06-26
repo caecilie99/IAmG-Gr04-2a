@@ -120,13 +120,13 @@
                     <input type='radio' id='imageURL' name='{{item.contentType}}' value='plain' on-change="setRadioEnv" checked="checked" ><label for="imageURL">URL</label>
                     <input type='radio' id='imageUpload' name='{{item.contentType}}' value='upload' on-change="setRadioEnv"><label for="imageUpload">Upload</label>
                     {{/if}}
-                    {{#if item.contentType == 'upload'}}
+                    {{#if item.contentType == 'plain'}}
+                    <input type="url" name="url" value="{{item.src}}" required="required">
+                    <input type="file" id="src" name="src" class="mwf-idle" />
+                    {{else}}
                     <input type="url" name="url" class="mwf-idle">
                     <!--<input type="file" id="src" name="src" value={{item.src}} onchange="fileSelected();" />-->
                     <input type="file" id="src" name="src" value={{item.src}} on-change="changeFile">
-                    {{else}}
-                    <input type="url" name="url" value="{{item.src}}" required="required">
-                    <input type="file" id="src" name="src" class="mwf-idle" />
                     {{/if}}
                 </fieldset>
                 <div id="preview" class="previewimg">
