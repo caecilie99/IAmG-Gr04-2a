@@ -35,7 +35,7 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                     document.getElementById("prevvideo1").classList.add("mwf-idle");
                 }else{
                     document.getElementById("previmg1").classList.add("mwf-idle");
-                    document.getElementById("prevvideo1").classList.remove("mwf-idle");
+                    //document.getElementById("prevvideo1").classList.remove("mwf-idle");
                 }
             }.bind(this));
 
@@ -79,7 +79,6 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
         }
 
         this.fileSelected = function() {
-            console.log("WO BIN ICH ??");
 
             // get selected file element
             var oFile = document.getElementById("src").files[0];
@@ -89,7 +88,6 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
             if (oFile.type.match(/^video\/.*$/)) {
                 // get preview element
                 console.log("video entdeckt");
-
                 var videoTag = document.getElementById("prevvideo1");
                 var oImage = document.getElementById("prevvideoSRC");
                 oImage.type = oFile.type;
