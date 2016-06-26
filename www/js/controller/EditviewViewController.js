@@ -25,6 +25,7 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
             }.bind(this));
 
             viewProxy.bindAction("changeFile", function(){
+                mediaItem.filechanged=true;
                 this.fileSelected();
             }.bind(this));
 
@@ -42,7 +43,7 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
             viewProxy.bindAction("submitForm", function(event){
                 event.original.preventDefault();
 
-                if(document.getElementById("imageURL").checked){
+                if ((document.getElementById("imageURL").checked) || (mediaItem.filechanged==false))  {
                     console.log(mediaItem.src);
                     if (mediaItem.created)
                         mediaItem.update();
@@ -51,9 +52,12 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                 }else{
                     console.log("Upload");
                     crudops = GenericCRUDImplRemote.newInstance("MediaItem");
-                    filetoupload = document.getElementById("src").files[0];
+                    if (mediaItem.filechanged) {
+                        filetoupload = document.getElementById("src").files[0];
+                        mediaItem.filechanged=false;
+                    }
                     if (mediaItem.created){
-                        filetoupload=mediaItem.src;
+                        //filetoupload=mediaItem.src;
                         crudops.persistMediaContent(mediaItem, "src", filetoupload, function(item){
                             item.update();
                         });}
@@ -61,7 +65,6 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
                         crudops.persistMediaContent(mediaItem, "src", filetoupload, function(item){
                             item.create();
                         });
-
                 }
 
                 this.previousView();

@@ -25,7 +25,7 @@ define(["mwfUtils", "EntityManager"], function (mwfUtils, EntityManager) {
         // Bereitstellung des Content
         this.contentProvision;
         this.instantiateManagedAttributes();
-
+        this.filechanged = false;
     }
 
     // use EntityManager.xtends in order to add entity-specific behaviour
