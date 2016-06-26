@@ -126,7 +126,9 @@ define(["mwf","entities", "GenericCRUDImplRemote"], function(mwf, entities, Gene
             }
             if (mediaItem.mediaType=='video'){
                 this.root.getElementsByTagName("video")[0].src = mediaItem.src;
+                console.log(this.root.getElementsByTagName("video")[0].src);
                 document.getElementById("previmg1").classList.add("mwf-idle");
+                document.getElementById("prevvideo1").classList.remove("mwf-idle");
             }
         }
         /*
